@@ -1,0 +1,296 @@
+﻿<Window x:Class="FeroKGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" 
+        xmlns:local="clr-namespace:FeroKGUI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800" 
+        WindowStyle="None" 
+        ResizeMode="NoResize"
+        Background="#181735">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25">
+
+            </RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition>
+
+            </ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid Background="#0f0f2D"
+              Grid.ColumnSpan="2"
+              MouseDown="Grid_MouseDown">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="FeroApp"
+                       Foreground="White"
+                       Grid.Column="1"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontFamily="Fonts/#Dosis"
+                       FontWeight="Medium"
+                       ></TextBlock>
+
+            <TextBlock Text="Menu"
+                       Foreground="LightGray"
+                       Grid.Column="2"
+                       VerticalAlignment="Bottom"
+                       HorizontalAlignment="Center"
+                       FontFamily="Fonts/#Dosis"
+                       FontWeight="Medium" Margin="16,0,16,6"
+                       ></TextBlock>
+
+            <TextBlock Text="Website"
+                       Foreground="LightGray"
+                       Grid.Column="3"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontFamily="Fonts/#Dosis"
+                       FontWeight="Medium"
+                       ></TextBlock>
+        </Grid>
+
+
+        <TextBlock Text="FeroApp"
+                       Foreground="White"
+                       FontSize="20"
+                       VerticalAlignment="Center"
+                       FontFamily="Fonts/#Dosis"
+                       FontWeight="Medium"
+                       Margin="74,36,662,-36"
+                       ></TextBlock>
+
+        <Image Width="50" Margin="10,26,740,-50"/>
+
+        <Button Content="Search from Website"
+                Foreground="White"
+                FontSize="14"
+                FontWeight="Medium" Margin="-269,76,269,-126"
+                Click="Website_Click">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                    <Setter Property="Background" Value="#FE6584"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF4c70"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="200" Height="25"
+                            CornerRadius="12"
+                            Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+
+        </Button>
+
+        <Button Content="Search for Recyclables"
+                Foreground="White"
+                FontSize="14"
+                FontWeight="Medium" Margin="-269,138,269,-138"
+                Click="Public_Click">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                    <Setter Property="Background" Value="#FE6584"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF4c70"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="200" Height="25"
+                            CornerRadius="12"
+                            Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+
+        </Button>
+
+        <Button Content="Search for Recycling Centers"
+                Foreground="White"
+                FontSize="14"
+                FontWeight="Medium" Margin="-269,176,269,-176"
+                Click="RC_Click">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                    <Setter Property="Background" Value="#FE6584"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF4c70"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="200" Height="25"
+                            CornerRadius="12"
+                            Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+
+        </Button>
+
+        <TextBox Margin="38,212,574,-208"/>
+        <TextBox Name="KG_Zipcode" Margin="37,210,574,-208" AcceptsReturn="True">
+            <TextBox.Style>
+                <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                    <Style.Resources>
+                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                            <VisualBrush.Visual>
+                                <Label Content="Current Zipcode" Foreground="LightGray" />
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Style.Resources>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+
+        <Button Content="Optimize Route"
+                Foreground="White"
+                FontSize="14"
+                FontWeight="Medium" Margin="-269,239,269,-239"
+                Click="OptimizeRoute_Click">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                    <Setter Property="Background" Value="#FE6584"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF4c70"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="200" Height="25"
+                            CornerRadius="12"
+                            Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+
+        </Button>
+
+        <Button Content="Chat"
+                Foreground="White"
+                FontSize="14"
+                FontWeight="Medium" Margin="-269,270,269,-270"
+                Click="Chat_Click">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                    <Setter Property="Background" Value="#FE6584"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF4c70"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="200" Height="25"
+                            CornerRadius="12"
+                            Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+
+        </Button>
+
+        <DataGrid AutoGenerateColumns="False" Name="RCGrid"  Margin="10,336,540,-463">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding name}"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding trashtype}"/>
+                <DataGridTextColumn Header="Amount" Binding="{Binding amount}"/>
+                <DataGridTextColumn Header="From" Binding="{Binding openingtime}"/>
+                <DataGridTextColumn Header="To" Binding="{Binding closingtime}"/>
+                <DataGridTextColumn Header="Zipcode" Binding="{Binding zipcode}"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+        <m:Map CredentialsProvider="fRPFc4ZzXV5MsgrJO2UC~zR1H67pRE89hOyB3g1603w~Ag9s_g6NU_mZFYV76RGpS2tl4_1vmZgnjjkjGz4q6PkOuZshl496bxlUWqDVuImO" 
+               Name="BingMaps"
+               Center="1.290270,103.851959" 
+               ZoomLevel="10" 
+               Margin="283,88,17,-364">
+        </m:Map>
+
+
+
+    </Grid>
+</Window>
