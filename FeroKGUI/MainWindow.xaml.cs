@@ -604,7 +604,7 @@ namespace FeroKGUI
                 var longitude = bingmapsinfo.resourceSets.First().resources.First().point.coordinates[0];
                 var latitude = bingmapsinfo.resourceSets.First().resources.First().point.coordinates[1];
                 var mapLocation = new Microsoft.Maps.MapControl.WPF.Location(longitude, latitude);
-                var p = new Pushpin() {Location = mapLocation, ToolTip = public_obj.name};
+                var p = new Pushpin() {Location = mapLocation, ToolTip = public_obj.name, Tag = public_obj.zipcode};
                 BingMaps.Children.Add(p);
             }
             RCGrid.ItemsSource = publicList;
@@ -770,8 +770,16 @@ namespace FeroKGUI
 
         private void Chat_Click(object sender, RoutedEventArgs e)
         {
-            ChatWindow chatWindow = new ChatWindow();
-            chatWindow.Show();
+            if (BingMaps.Children.Count == 0)
+            {
+                MessageBox.Show("No points on map.");
+            }
+            else
+            {
+                ChatWindow chatWindow = new ChatWindow();
+                chatWindow.Show();
+            }
+            
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)

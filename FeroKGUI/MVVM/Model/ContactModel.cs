@@ -13,5 +13,6 @@ namespace FeroKGUI.MVVM.Model
         public string ImageSource { get; set; }
         public ObservableCollection<MessageModel> Messages { get; set; }
         public string LastMessage => Messages.Last().Message;
+        public string Channel { get; set; }
     }
 }

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using FeroKGUI.MVVM.Model;
 using FeroKGUI.Core;
+using System.Windows;
+using Microsoft.Maps.MapControl.WPF;
+using System.Net.Http;
 
 namespace FeroKGUI.MVVM.ViewModel
 {
@@ -47,18 +50,78 @@ namespace FeroKGUI.MVVM.ViewModel
             Contacts = new ObservableCollection<ContactModel>();
 
             ObservableCollection<MessageModel> Messages2 = new ObservableCollection<MessageModel>();
+            List<ObservableCollection<MessageModel>> messageList = new List<ObservableCollection<MessageModel>>();
+
+            Microsoft.Maps.MapControl.WPF.Map BingMaps = ((MainWindow)Application.Current.MainWindow).BingMaps;
+            int counter = 0;
+            foreach (Pushpin pin in BingMaps.Children)
+            {
+                messageList.Add(new ObservableCollection<MessageModel>());
+                messageList[counter].Add(new MessageModel
+                {
+                    Username = "Admin",
+                    UsernameColor = "#409aff",
+                    ImageSource = "https://imgur.com/yMWvLXd.png",
+                    Message = "Connection Established",
+                    Time = DateTime.Now,
+                    IsNativeOrigin = false,
+                    FirstMessage = true
+                });
+
+                Contacts.Add(new ContactModel
+                {
+                    Username = pin.ToolTip.ToString(),
+                    ImageSource = "https://i.imgur.com/i2szTsp.png",
+                    Messages = messageList[counter],
+                    Channel = pin.Tag.ToString()
+                });
+                Console.WriteLine("Zipcode " + pin.Tag);
+                counter++;
+            }
+
+            if (SelectedContact == null)
+            {
+                SelectedContact = Contacts[0];
+            };
 
 
             SendCommand = new RelayCommand(o =>
             {
-                Messages.Add(new MessageModel
+                if (SelectedContact == null) //Just in case
                 {
-                    Message = Message,
-                    FirstMessage = false
-                });
+                    SelectedContact = Contacts[0];
+                };
+
+                Console.WriteLine("Channel no: "+ SelectedContact.Channel);
+                if (SelectedContact.Messages.Last().IsNativeOrigin == true)
+                {
+                    SelectedContact.Messages.Add(new MessageModel
+                    {
+                        Message = Message,
+                        FirstMessage = false,
+                        Time = DateTime.Now,
+                        IsNativeOrigin = true,
+                    });
+                }
+                else
+                {
+                    SelectedContact.Messages.Add(new MessageModel
+                    {
+                        Username = "Bunny",
+                        UsernameColor = "#409aff",
+                        ImageSource = "https://imgur.com/yMWvLXd.png",
+                        Message = Message,
+                        Time = DateTime.Now,
+                        IsNativeOrigin = true,
+                    });
+                }
 
                 Message = "";
+
+                httpsend(SelectedContact);
             });
+
+            /*
             Messages.Add(new MessageModel
             {
                 Username = "Allison",
@@ -108,7 +171,7 @@ namespace FeroKGUI.MVVM.ViewModel
             });
 
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 2; i++)
             {
                 Contacts.Add(new ContactModel
                 {
@@ -136,8 +199,35 @@ namespace FeroKGUI.MVVM.ViewModel
                 ImageSource = "https://i.imgur.com/i2szTsp.png",
                 Messages = Messages2
             });
+            */
 
+        }
 
+        private void httpsend(ContactModel selectedContact)
+        {
+            string channel = selectedContact.Channel;
+            string name = selectedContact.Username;
+            string message = selectedContact.LastMessage;
+            string ImageSource = selectedContact.ImageSource;
+
+            HttpClient feroChat = new HttpClient();
+            feroChat.BaseAddress = new Uri("https://ferochat.herokuapp.com/");
+
+            var values = new Dictionary<string, string>
+                {
+                    { "channel", channel },
+                    { "name", name },
+                    { "message", message },
+                    { "ImageSource", ImageSource }
+                };
+
+            var content = new FormUrlEncodedContent(values);
+            var response = feroChat.PostAsync("https://ferochat.herokuapp.com/", content);
+            response.Wait();
+            var responseString = response.Result.Content.ReadAsStringAsync().Result;
+            Console.WriteLine("responseString: " + responseString);
+
+            throw new NotImplementedException();
         }
     }
 }
